@@ -307,6 +307,21 @@ tests/fast:
 .PHONY : tests/fast
 
 # target to build an object file
+src/laser_scan.o:
+	$(MAKE) -f CMakeFiles/mrpt_bridge.dir/build.make CMakeFiles/mrpt_bridge.dir/src/laser_scan.o
+.PHONY : src/laser_scan.o
+
+# target to preprocess a source file
+src/laser_scan.i:
+	$(MAKE) -f CMakeFiles/mrpt_bridge.dir/build.make CMakeFiles/mrpt_bridge.dir/src/laser_scan.i
+.PHONY : src/laser_scan.i
+
+# target to generate assembly for a file
+src/laser_scan.s:
+	$(MAKE) -f CMakeFiles/mrpt_bridge.dir/build.make CMakeFiles/mrpt_bridge.dir/src/laser_scan.s
+.PHONY : src/laser_scan.s
+
+# target to build an object file
 src/point_cloud.o:
 	$(MAKE) -f CMakeFiles/mrpt_bridge.dir/build.make CMakeFiles/mrpt_bridge.dir/src/point_cloud.o
 .PHONY : src/point_cloud.o
@@ -345,6 +360,9 @@ help:
 	@echo "... test-results"
 	@echo "... test-results-run"
 	@echo "... tests"
+	@echo "... src/laser_scan.o"
+	@echo "... src/laser_scan.i"
+	@echo "... src/laser_scan.s"
 	@echo "... src/point_cloud.o"
 	@echo "... src/point_cloud.i"
 	@echo "... src/point_cloud.s"
