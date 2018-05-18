@@ -2,7 +2,7 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-0.1.11 (2018-05-18)
+0.1.22 (2018-05-18)
 -------------------
 * Release as an independent repository outside of "mrpt_navigation"
 
