@@ -2,7 +2,7 @@
 <package format="2">
   <name>mrpt_bridge</name>
   <version>0.1.22</version>
-  <description>C++ libraries to convert between ROS and MRPT classes and messages</description>
+  <description>C++ library to convert between ROS messages and MRPT classes</description>
 
   <maintainer email="jlblanco@ual.es">Jose-Luis Blanco-Claraco</maintainer>
   <author email="markus.bader@tuwien.ac.at">Markus Bader</author>
@@ -23,7 +23,7 @@
   <depend>marker_msgs</depend>
   <depend>cv_bridge</depend>
   <depend>stereo_msgs</depend>
-  <depend>message_runtime</depend>
+  <exec_depend>message_runtime</exec_depend>
   <build_depend>pcl_conversions</build_depend> <!-- Only during BUILD: for unit tests -->
   <build_depend>libpcl-all-dev</build_depend> <!-- Only during BUILD: for unit tests -->
 

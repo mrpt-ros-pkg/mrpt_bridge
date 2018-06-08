@@ -6,8 +6,19 @@ project(mrpt_bridge)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-	geometry_msgs message_generation mrpt_msgs nav_msgs
-	pcl_conversions roscpp sensor_msgs std_msgs  tf cv_bridge marker_msgs )
+	cv_bridge
+	geometry_msgs
+	marker_msgs
+	message_generation
+	mrpt_msgs
+	nav_msgs
+	pcl_conversions
+	roscpp
+	sensor_msgs
+	std_msgs
+	stereo_msgs
+	tf
+)
 
 ## System dependencies are found with CMake's conventions
 find_package(PCL 1.3 REQUIRED COMPONENTS common io)
@@ -40,7 +51,15 @@ endif()
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS geometry_msgs message_runtime mrpt_msgs nav_msgs sensor_msgs std_msgs
+  CATKIN_DEPENDS
+	geometry_msgs
+	marker_msgs
+	message_runtime
+	mrpt_msgs
+	nav_msgs
+	sensor_msgs
+	std_msgs
+	stereo_msgs
 #  DEPENDS pcl mrpt  # opencv
 )
 
@@ -54,21 +73,26 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}
+	include/${PROJECT_NAME}/GPS.h
+	include/${PROJECT_NAME}/imu.h
+	include/${PROJECT_NAME}/range.h
+	include/${PROJECT_NAME}/stereo_image.h
 	src/beacon.cpp
+	src/GPS.cpp
+	src/image.cpp
+	src/image.cpp
+	src/imu.cpp
 	src/landmark.cpp
 	src/laser_scan.cpp
-	src/marker_msgs.cpp
 	src/map.cpp
+	src/marker_msgs.cpp
 	src/network_of_poses.cpp
 	src/point_cloud.cpp
 	src/point_cloud2.cpp
 	src/pose.cpp
-
-	src/imu.cpp include/mrpt_bridge/imu.h
-	src/image.cpp src/image.cpp
-	src/GPS.cpp include/mrpt_bridge/GPS.h
-	src/range.cpp include/mrpt_bridge/range.h
-	src/stereo_image.cpp include/mrpt_bridge/stereo_image.h)
+	src/range.cpp
+	src/stereo_image.cpp
+)
 
 ## Declare a cpp executable
 
