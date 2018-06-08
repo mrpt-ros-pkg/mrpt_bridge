@@ -2,6 +2,12 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* make catkin_lint clean
+* ROS build farm badges and links
+* Contributors: Jose Luis Blanco-Claraco
+
 0.1.22 (2018-05-18)
 -------------------
 * Release as an independent repository outside of "mrpt_navigation"
@@ -258,4 +264,3 @@ Changelog for package mrpt_bridge
 * Fix build with mrpt 1.2.x
 * localization uses tf odom
 * localization working like amcl
-
