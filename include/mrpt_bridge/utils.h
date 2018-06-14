@@ -13,7 +13,7 @@
 #include <mrpt/version.h>
 #include <log4cxx/logger.h>
 
-#if MRPT_VERSION>=0x199
+#if MRPT_VERSION >= 0x199
 #include <mrpt/system/COutputLogger.h>
 using namespace mrpt::system;
 #else
@@ -24,9 +24,9 @@ using namespace mrpt::utils;
 namespace mrpt_bridge
 {
 /**
-*@brief function that converts ROS verbosity level log4cxx::Level to MRPT
-* equivalent MRPT's VerbosityLevel
-*/
+ *@brief function that converts ROS verbosity level log4cxx::Level to MRPT
+ * equivalent MRPT's VerbosityLevel
+ */
 inline VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(log4cxx::LevelPtr lvl)
 {
 	using namespace log4cxx;
@@ -60,12 +60,12 @@ inline VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(log4cxx::LevelPtr lvl)
 }  // end of rosLoggerLvlToMRPTLoggerLvl
 
 /**
-*@brief callback that is called by MRPT mrpt::utils::COuputLogger to redirect
-* log messages to ROS logger.
-*	This function has to be inline, otherwise option
-* log4j.logger.ros.package_name will be taken from mrpt_bridge
-* instead of the package from which macro is actually called.
-*/
+ *@brief callback that is called by MRPT mrpt::utils::COuputLogger to redirect
+ * log messages to ROS logger.
+ *	This function has to be inline, otherwise option
+ * log4j.logger.ros.package_name will be taken from mrpt_bridge
+ * instead of the package from which macro is actually called.
+ */
 inline void mrptToROSLoggerCallback(
 	const std::string& msg, const VerbosityLevel level,
 	const std::string& loggerName, const mrpt::system::TTimeStamp timestamp)
@@ -100,15 +100,15 @@ inline void mrptToROSLoggerCallback_mrpt_15(
 	const std::string& loggerName, const mrpt::system::TTimeStamp timestamp,
 	void* userParam)
 {
-    mrptToROSLoggerCallback(msg,level,loggerName,timestamp);
+	mrptToROSLoggerCallback(msg, level, loggerName, timestamp);
 }
 
-inline mrpt::math::TPose3D p2t(const mrpt::poses::CPose3D &p)
+inline mrpt::math::TPose3D p2t(const mrpt::poses::CPose3D& p)
 {
-#if MRPT_VERSION>=0x199
+#if MRPT_VERSION >= 0x199
 	return p.asTPose();
 #else
-	return TPose3D(p);
+	return mrpt::math::TPose3D(p);
 #endif
 }
 
