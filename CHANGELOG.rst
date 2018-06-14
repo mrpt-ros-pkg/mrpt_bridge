@@ -2,6 +2,13 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix missing namespace
+* Reorganize build farm icons
+* Update README.md
+* Contributors: Jose Luis Blanco-Claraco
+
 0.1.23 (2018-06-08)
 -------------------
 * make catkin_lint clean
