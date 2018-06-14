@@ -2,8 +2,8 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.24 (2018-06-14)
+-------------------
 * fix missing namespace
 * Reorganize build farm icons
 * Update README.md
