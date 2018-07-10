@@ -26,6 +26,9 @@
   <exec_depend>message_runtime</exec_depend>
   <build_depend>pcl_conversions</build_depend> <!-- Only during BUILD: for unit tests -->
   <build_depend>libpcl-all-dev</build_depend> <!-- Only during BUILD: for unit tests -->
+  <!-- Workaround for Debian Stretch not importing qtbase5-dev by itself;
+       only necessary during binary BUILD for the unit tests. -->
+  <build_depend>qtbase5-dev</build_depend>
 
   <!-- Use buildtool_depend for build tool packages: -->
   <buildtool_depend>catkin</buildtool_depend>
