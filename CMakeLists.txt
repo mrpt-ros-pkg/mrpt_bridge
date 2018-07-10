@@ -28,6 +28,10 @@ add_definitions(${PCL_DEFINITIONS})
 find_package(MRPT 1.5 REQUIRED obs graphs maps slam)
 message(STATUS "MRPT_VERSION: ${MRPT_VERSION}")
 
+# Debian Stretch doesn't properly find the recursive Qt5Widgets dependency from
+# PCL io.  We force find it here so that cmake is happy.
+find_package(Qt5Widgets REQUIRED)
+
 if (CMAKE_COMPILER_IS_GNUCXX)
 	# High level of warnings.
 	# The -Wno-long-long is required in 64bit systems when including sytem headers.
