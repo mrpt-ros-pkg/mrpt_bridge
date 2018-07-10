@@ -49,9 +49,9 @@ TEST(Map, basicTestHeader)
 	EXPECT_EQ(srcRos.info.width, desMrpt.getSizeX());
 	EXPECT_EQ(srcRos.info.height, desMrpt.getSizeY());
 	EXPECT_EQ(srcRos.info.resolution, desMrpt.getResolution());
-	for (int h = 0; h < srcRos.info.width; h++)
+	for (uint32_t h = 0; h < srcRos.info.width; h++)
 	{
-		for (int w = 0; w < srcRos.info.width; w++)
+		for (uint32_t w = 0; w < srcRos.info.width; w++)
 		{
 			EXPECT_EQ(
 				desMrpt.getPos(w, h), 0.5);  // all -1 entreis should map to 0.5
@@ -69,9 +69,9 @@ TEST(Map, check_ros2mrpt_and_back)
 
 	ASSERT_TRUE(mrpt_bridge::convert(srcRos, desMrpt));
 	ASSERT_TRUE(mrpt_bridge::convert(desMrpt, desRos, desRos.header));
-	for (int h = 0; h < srcRos.info.width; h++)
+	for (uint32_t h = 0; h < srcRos.info.width; h++)
 	{
-		for (int w = 0; w < srcRos.info.width; w++)
+		for (uint32_t w = 0; w < srcRos.info.width; w++)
 		{
 			EXPECT_EQ(
 				desRos.data[h * srcRos.info.width + h],
