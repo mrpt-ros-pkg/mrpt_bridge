@@ -75,7 +75,7 @@ tf::Transform& convert(const mrpt::math::TPose2D& _src, tf::Transform& _des);
 geometry_msgs::Pose& convert(
 	const mrpt::poses::CPose3D& _src, geometry_msgs::Pose& _des);
 
-/** Convert: [MRPT] CPose3D \rightarrow [ROS] Pose */
+/** Convert: [MRPT] TPose2D \rightarrow [ROS] Pose */
 geometry_msgs::Pose& convert(
 	const mrpt::math::TPose2D& _src, geometry_msgs::Pose& _des);
 
