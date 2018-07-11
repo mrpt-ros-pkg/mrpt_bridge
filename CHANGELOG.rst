@@ -2,6 +2,26 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Merge pull request `#3 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/3>`_ from tuw-robotics/master
+  TPose2D to geometry_msgs::Pose
+* Update pose.h
+* TPose2D Conversion to geometry_msgs::Pose added
+* Merge pull request `#2 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/2>`_ from clalancette/fix-deb-stretch
+  Fix deb stretch
+* Fix build warnings for signed/unsigned comparison.
+  The width and height of the OccupancyGrid metadata are both
+  uint32, so make the loop iterator type match.
+  Signed-off-by: Chris Lalancette <clalancette@openrobotics.org>
+* Workaround Debian stretch not properly setting up Qt dependencies.
+  libpcl-dev really has a dependency on Qt5Widgets, but that
+  is not expressed by the Debian Stretch packages.  We workaround
+  it here by forcing the dependency in both the package.xml and
+  the CMakeLists.txt
+  Signed-off-by: Chris Lalancette <clalancette@openrobotics.org>
+* Contributors: Chris Lalancette, Jose Luis Blanco-Claraco, Markus Bader
+
 0.1.24 (2018-06-14)
 -------------------
 * fix missing namespace
