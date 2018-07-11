@@ -2,8 +2,8 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.25 (2018-07-11)
+-------------------
 * Merge pull request `#3 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/3>`_ from tuw-robotics/master
   TPose2D to geometry_msgs::Pose
 * Update pose.h
