@@ -177,6 +177,36 @@ geometry_msgs::Pose& mrpt_bridge::convert(
 	return _des;
 }
 
+
+/** Convert: MRPT's TPose2D (x,y,yaw) -> ROS's Pose */
+geometry_msgs::Pose& mrpt_bridge::convert(
+	const mrpt::math::TPose2D& _src, geometry_msgs::Pose& _des)
+{
+	_des.position.x = _src.x;
+	_des.position.y = _src.y;
+	_des.position.z = 0;
+
+	const double yaw = _src.phi;
+	if (std::abs(yaw) < 1e-10)
+	{
+		_des.orientation.x = 0.;
+		_des.orientation.y = 0.;
+		_des.orientation.z = .5 * yaw;
+		_des.orientation.w = 1.;
+	}
+	else
+	{
+		const double s = ::sin(yaw * .5);
+		const double c = ::cos(yaw * .5);
+		_des.orientation.x = 0.;
+		_des.orientation.y = 0.;
+		_des.orientation.z = s;
+		_des.orientation.w = c;
+	}
+
+	return _des;
+}
+
 mrpt::poses::CPose2D& mrpt_bridge::convert(
 	const geometry_msgs::Pose& _src, mrpt::poses::CPose2D& _des)
 {
