@@ -1,5 +1,13 @@
-#ifndef MRPT_BRIDGE_LOG_MACROS_H
-#define MRPT_BRIDGE_LOG_MACROS_H
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
+#pragma once
 
 #include <cstdarg>
 
@@ -92,5 +100,3 @@
 		ROS_ERROR("%s", buffer);                    \
 		va_end(argptr);                             \
 	}
-
-#endif  // MRPT_BRIDGE_LOG_MACROS_H

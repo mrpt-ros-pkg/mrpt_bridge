@@ -1,13 +1,23 @@
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
 
 #include "mrpt_bridge/point_cloud.h"
 #include <ros/console.h>
 
+using namespace mrpt::maps;
+
 namespace mrpt_bridge
 {
 /** Convert sensor_msgs/PointCloud -> mrpt::slam::CSimplePointsMap
-  *
-  * \return true on sucessful conversion, false on any error.
-  */
+ *
+ * \return true on sucessful conversion, false on any error.
+ */
 bool point_cloud::ros2mrpt(
 	const sensor_msgs::PointCloud& msg, CSimplePointsMap& obj)
 {
@@ -22,13 +32,13 @@ bool point_cloud::ros2mrpt(
 }
 
 /** Convert mrpt::maps::CSimplePointsMap -> sensor_msgs/PointCloud
-  *  The user must supply the "msg_header" field to be copied into the output
+ *  The user must supply the "msg_header" field to be copied into the output
  * message object, since that part does not appear in MRPT classes.
-  *
-  *  Since CSimplePointsMap only contains (x,y,z) data,
+ *
+ *  Since CSimplePointsMap only contains (x,y,z) data,
  * sensor_msgs::PointCloud::channels will be empty.
-  * \return true on sucessful conversion, false on any error.
-  */
+ * \return true on sucessful conversion, false on any error.
+ */
 bool point_cloud::mrpt2ros(
 	const CSimplePointsMap& obj, const std_msgs::Header& msg_header,
 	sensor_msgs::PointCloud& msg)

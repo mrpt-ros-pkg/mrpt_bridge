@@ -1,11 +1,19 @@
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
 /*
  * File: utils.h
  * Author: Vladislav Tananaev
  *
  */
 
-#ifndef MRPT_BRIDGE_UTILS_H
-#define MRPT_BRIDGE_UTILS_H
+#pragma once
 
 #include <ros/console.h>
 #include <mrpt/system/datetime.h>
@@ -113,5 +121,3 @@ inline mrpt::math::TPose3D p2t(const mrpt::poses::CPose3D& p)
 }
 
 }  // namespace mrpt_bridge
-
-#endif  // MRPT_BRIDGE_UTILS_H

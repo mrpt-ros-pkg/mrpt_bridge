@@ -1,3 +1,11 @@
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
 
 #include <geometry_msgs/Pose.h>
 #include "mrpt_bridge/time.h"
@@ -86,4 +94,4 @@ bool convert(
 	convert(pose, _pose);
 	return true;
 }
-}  // end namespace
+}  // namespace mrpt_bridge

@@ -1,5 +1,13 @@
-#ifndef MRPT_BRIDGE_POSE_H
-#define MRPT_BRIDGE_POSE_H
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
+#pragma once
 
 #include <cstring>  // size_t
 
@@ -13,7 +21,7 @@ namespace tf
 {
 class Transform;
 class Matrix3x3;
-}
+}  // namespace tf
 
 namespace geometry_msgs
 {
@@ -26,7 +34,7 @@ typedef PoseWithCovariance_<std::allocator<void>> PoseWithCovariance;
 template <class ContainerAllocator>
 struct Quaternion_;
 typedef Quaternion_<std::allocator<void>> Quaternion;
-}
+}  // namespace geometry_msgs
 
 namespace mrpt
 {
@@ -39,7 +47,7 @@ class CMatrixFixedNumeric;
 typedef CMatrixFixedNumeric<double, 3, 3> CMatrixDouble33;
 struct TPose3D;
 struct TPose2D;
-}
+}  // namespace math
 namespace poses
 {
 class CPose2D;
@@ -49,8 +57,8 @@ class CPosePDFGaussianInf;
 class CPose3DPDFGaussian;
 class CPose3DPDFGaussianInf;
 typedef math::CQuaternion<double> CQuaternionDouble;
-}
-}
+}  // namespace poses
+}  // namespace mrpt
 
 namespace mrpt_bridge
 {
@@ -165,6 +173,4 @@ mrpt::poses::CQuaternionDouble& convert(
 	mrpt::poses::CQuaternionDouble& _des);
 
 /**\} */
-}
-
-#endif /* MRPT_BRIDGE_POSE_H */
+}  // namespace mrpt_bridge

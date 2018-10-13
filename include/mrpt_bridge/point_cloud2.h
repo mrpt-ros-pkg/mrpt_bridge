@@ -1,5 +1,13 @@
-#ifndef MRPT_BRIDGE_POINT_CLOUD2_H
-#define MRPT_BRIDGE_POINT_CLOUD2_H
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
+#pragma once
 
 namespace std
 {
@@ -12,14 +20,14 @@ namespace std_msgs
 template <class ContainerAllocator>
 struct Header_;
 typedef Header_<std::allocator<void>> Header;
-}
+}  // namespace std_msgs
 
 namespace sensor_msgs
 {
 template <class ContainerAllocator>
 struct PointCloud2_;
 typedef PointCloud2_<std::allocator<void>> PointCloud2;
-}
+}  // namespace sensor_msgs
 
 #include <mrpt/version.h>
 namespace mrpt
@@ -28,8 +36,8 @@ namespace maps
 {
 class CSimplePointsMap;
 class CColouredPointsMap;
-}
-}
+}  // namespace maps
+}  // namespace mrpt
 
 namespace mrpt_bridge
 {
@@ -61,5 +69,3 @@ bool copy(
 /** @} */
 
 }  // namespace mrpt_bridge
-
-#endif  // MRPT_BRIDGE_POINT_CLOUD2_H

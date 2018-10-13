@@ -1,19 +1,17 @@
-/* +---------------------------------------------------------------------------+
-	 |                     Mobile Robot Programming Toolkit (MRPT) |
-	 |                          http://www.mrpt.org/ |
-	 | |
-	 | Copyright (c) 2005-2016, Individual contributors, see AUTHORS file |
-	 | See: http://www.mrpt.org/Authors - All rights reserved. |
-	 | Released under BSD License. See details in http://www.mrpt.org/License |
-	 +---------------------------------------------------------------------------+
-   */
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
 
 /**\brief File includes methods for converting CNetworkOfPoses*DInf <=>
  * NetworkOfPoses message types
  */
 
-#ifndef NETWORK_OF_POSES_H
-#define NETWORK_OF_POSES_H
+#pragma once
 
 #include <mrpt_msgs/NetworkOfPoses.h>
 #include <mrpt/graphs/CNetworkOfPoses.h>
@@ -88,6 +86,4 @@ void convert(
 
 /**\} */
 
-}  // end of namespace - mrpt_bridge
-
-#endif /* end of include guard: NETWORK_OF_POSES_H */
+}  // namespace mrpt_bridge

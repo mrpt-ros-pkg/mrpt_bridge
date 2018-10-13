@@ -1,3 +1,12 @@
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
 #include <sensor_msgs/PointField.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <ros/console.h>
@@ -41,8 +50,8 @@ inline void get_float_from_field(
 		if (field->datatype == sensor_msgs::PointField::FLOAT32)
 			output = *(reinterpret_cast<const float*>(&data[field->offset]));
 		else
-			output =
-				(float)(*(reinterpret_cast<const double*>(&data[field->offset])));
+			output = (float)(*(
+				reinterpret_cast<const double*>(&data[field->offset])));
 	}
 	else
 		output = 0.0;
@@ -110,4 +119,4 @@ bool copy(
 	return true;
 }
 
-}  // namespace image_proc
+}  // namespace mrpt_bridge

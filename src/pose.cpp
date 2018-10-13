@@ -1,3 +1,12 @@
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
 /*
  * pose.cpp
  *
@@ -6,13 +15,10 @@
  *
  *      To understand better how this is implemented see the references:
  *      - http://www.mrpt.org/2D_3D_Geometry
- *
  */
 
 /**
 \mainpage
-
-\htmlinclude manifest.html
 
 \b mrpt_bridge is a set of functions to convert between common ROS messages and
 MRPT C++ classes.
@@ -34,7 +40,7 @@ MRPT C++ classes.
 #include <tf/tf.h>
 
 #include <mrpt/version.h>
-#if MRPT_VERSION<0x199
+#if MRPT_VERSION < 0x199
 #include <mrpt/utils/mrpt_macros.h>
 #else
 #include <mrpt/core/exceptions.h>
@@ -176,7 +182,6 @@ geometry_msgs::Pose& mrpt_bridge::convert(
 
 	return _des;
 }
-
 
 /** Convert: MRPT's TPose2D (x,y,yaw) -> ROS's Pose */
 geometry_msgs::Pose& mrpt_bridge::convert(

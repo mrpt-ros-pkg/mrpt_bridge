@@ -1,11 +1,19 @@
-#ifndef ROSPKG_MRPT_BRIDGE_ALL_H
-#define ROSPKG_MRPT_BRIDGE_ALL_H
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
+
+#pragma once
 
 // This header includes all other headers in this package:
-#include <mrpt_bridge/time.h>
-#include <mrpt_bridge/laser_scan.h>
-#include <mrpt_bridge/point_cloud.h>
-#include <mrpt_bridge/map.h>
+#include "time.h"
+#include "laser_scan.h"
+#include "point_cloud.h"
+#include "map.h"
 #include "pose.h"
 #include "point_cloud2.h"
 #include "beacon.h"
@@ -17,5 +25,3 @@
 #include "GPS.h"
 #include "range.h"
 #include "image.h"
-
-#endif

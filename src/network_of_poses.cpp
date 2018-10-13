@@ -1,12 +1,11 @@
-/* +---------------------------------------------------------------------------+
-	 |                     Mobile Robot Programming Toolkit (MRPT) |
-	 |                          http://www.mrpt.org/ |
-	 | |
-	 | Copyright (c) 2005-2016, Individual contributors, see AUTHORS file |
-	 | See: http://www.mrpt.org/Authors - All rights reserved. |
-	 | Released under BSD License. See details in http://www.mrpt.org/License |
-	 +---------------------------------------------------------------------------+
-   */
+/* +------------------------------------------------------------------------+
+   |                     Mobile Robot Programming Toolkit (MRPT)            |
+   |                          http://www.mrpt.org/                          |
+   |                                                                        |
+   | Copyright (c) 2005-2018, Individual contributors, see AUTHORS file     |
+   | See: http://www.mrpt.org/Authors - All rights reserved.                |
+   | Released under BSD License. See details in http://www.mrpt.org/License |
+   +------------------------------------------------------------------------+ */
 
 #include "mrpt_bridge/network_of_poses.h"
 #include "mrpt_bridge/pose.h"
@@ -18,13 +17,12 @@
 #include <iostream>  // for debugging reasons
 
 #include <mrpt/version.h>
-#if MRPT_VERSION<0x199
+#if MRPT_VERSION < 0x199
 using namespace mrpt::utils;
 #else
 #include <mrpt/graphs/TNodeID.h>
 using mrpt::graphs::TNodeID;
 #endif
-
 
 namespace mrpt_bridge
 {
@@ -226,10 +224,9 @@ void convert(
 		 constr_cit != ros_graph.constraints.end(); ++constr_cit)
 	{
 		// constraint ends
-		auto constr_ends(
-			make_pair(
-				static_cast<TNodeID>(constr_cit->nodeID_from),
-				static_cast<TNodeID>(constr_cit->nodeID_to)));
+		auto constr_ends(make_pair(
+			static_cast<TNodeID>(constr_cit->nodeID_from),
+			static_cast<TNodeID>(constr_cit->nodeID_to)));
 
 		// constraint value
 		mrpt::poses::CPosePDFGaussianInf mrpt_constr;
@@ -293,10 +290,9 @@ void convert(
 		 constr_cit != ros_graph.constraints.end(); ++constr_cit)
 	{
 		// constraint ends
-		auto constr_ends(
-			make_pair(
-				static_cast<TNodeID>(constr_cit->nodeID_from),
-				static_cast<TNodeID>(constr_cit->nodeID_to)));
+		auto constr_ends(make_pair(
+			static_cast<TNodeID>(constr_cit->nodeID_from),
+			static_cast<TNodeID>(constr_cit->nodeID_to)));
 
 		// constraint value
 		mrpt::poses::CPosePDFGaussianInf mrpt_constr;
@@ -317,4 +313,4 @@ void convert(
 	THROW_EXCEPTION("Conversion not implemented yet");
 }
 
-}  // end of namespace
+}  // namespace mrpt_bridge
