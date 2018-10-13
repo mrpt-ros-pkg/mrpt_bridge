@@ -96,6 +96,7 @@ add_library(${PROJECT_NAME}
 	src/pose.cpp
 	src/range.cpp
 	src/stereo_image.cpp
+	src/time.cpp
 )
 
 ## Declare a cpp executable
