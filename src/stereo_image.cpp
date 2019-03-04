@@ -13,9 +13,8 @@
 	AUTHOR: Raghavender Sahdev <raghavendersahdev@gmail.com>
   ---------------------------------------------------------------*/
 
-#include "mrpt_bridge/stereo_image.h"
-
 #include "ros/ros.h"
+#include "mrpt_bridge/stereo_image.h"
 #include "mrpt_bridge/image.h"
 #include <opencv/highgui.h>
 #include <cv_bridge/cv_bridge.h>
@@ -56,7 +55,11 @@ bool mrpt2ros(
 {
 	/// left image
 	CImage temp_img = obj.imageLeft;
+#if MRPT_VERSION>=0x199
+	Mat cvImg = temp_img.asCvMatRef();
+#else
 	Mat cvImg = cv::cvarrToMat(temp_img.getAs<IplImage>());
+#endif
 	cv_bridge::CvImage img_bridge;
 	img_bridge =
 		CvImage(left.header, sensor_msgs::image_encodings::BGR8, cvImg);
@@ -68,7 +71,11 @@ bool mrpt2ros(
 
 	/// right image
 	CImage temp_img2 = obj.imageRight;
+#if MRPT_VERSION>=0x199
+	Mat cvImg2 = temp_img2.asCvMatRef();
+#else
 	Mat cvImg2 = cv::cvarrToMat(temp_img2.getAs<IplImage>());
+#endif
 	cv_bridge::CvImage img_bridge2;
 	img_bridge2 =
 		CvImage(right.header, sensor_msgs::image_encodings::BGR8, cvImg2);
@@ -81,7 +88,11 @@ bool mrpt2ros(
 	if (obj.hasImageDisparity)
 	{
 		CImage temp_disp = obj.imageDisparity;
+#if MRPT_VERSION>=0x199
+		Mat cvImg3 = temp_disp.asCvMatRef();
+#else
 		Mat cvImg3 = cv::cvarrToMat(temp_disp.getAs<IplImage>());
+#endif
 		cv_bridge::CvImage img_bridge3;
 		img_bridge3 = CvImage(
 			disparity.header, sensor_msgs::image_encodings::BGR8, cvImg3);

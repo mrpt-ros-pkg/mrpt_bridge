@@ -56,10 +56,13 @@ bool mrpt2ros(
 	sensor_msgs::Image& msg)
 {
 	CImage temp_img = obj.image;
+#if MRPT_VERSION>=0x199
+	Mat cvImg = temp_img.asCvMatRef();
+#else
 	Mat cvImg = cv::cvarrToMat(temp_img.getAs<IplImage>());
+#endif
 
 	cv_bridge::CvImage img_bridge;
-	sensor_msgs::Image img_msg;
 
 	img_bridge = CvImage(msg.header, sensor_msgs::image_encodings::BGR8, cvImg);
 	img_bridge.toImageMsg(msg);
