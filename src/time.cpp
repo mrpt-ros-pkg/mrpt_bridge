@@ -23,5 +23,5 @@ void mrpt_bridge::convert(const mrpt::system::TTimeStamp& src, ros::Time& des)
 	// fractional parts:
 	const double t = mrpt::system::timestampTotime_t(src);
 	des.sec = static_cast<uint64_t>(t);
-	des.nsec = static_cast<uint64_t>(std::fmod(t, 1.0) * 1e9);
+	des.nsec = static_cast<uint64_t>(std::fmod(t, 1.0) * 1e9 + 0.5 /*round*/);
 }
