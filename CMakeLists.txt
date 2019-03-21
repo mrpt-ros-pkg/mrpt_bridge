@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.1)
-set (CMAKE_CXX_STANDARD 14)
 project(mrpt_bridge)
 
 ## Find catkin macros and# libraries
@@ -27,6 +26,9 @@ add_definitions(${PCL_DEFINITIONS})
 
 find_package(MRPT 1.5 REQUIRED obs graphs maps slam)
 message(STATUS "MRPT_VERSION: ${MRPT_VERSION}")
+if(MRPT_VERSION VERSION_LESS "1.9.9")
+	set (CMAKE_CXX_STANDARD 14)
+endif()
 
 # Debian Stretch doesn't properly find the recursive Qt5Widgets dependency from
 # PCL io.  We force find it here so that cmake is happy.
@@ -111,11 +113,11 @@ add_dependencies(${PROJECT_NAME}
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
    ${catkin_LIBRARIES}
-   ${MRPT_LIBS}
+   ${MRPT_LIBRARIES}
 )
 
 add_executable(test_Bridge src/test/test_Bridge.cpp)
-target_link_libraries(test_Bridge ${catkin_LIBRARIES} ${MRPT_LINKER_LIBS}	 ${MRPT_LIBS})
+target_link_libraries(test_Bridge ${catkin_LIBRARIES} ${MRPT_LIBRARIES})
 add_dependencies(test_Bridge mrpt_msgs_generate_messages_cpp ${catkin_EXPORTED_TARGETS})
 
 #############
@@ -152,6 +154,6 @@ if(CATKIN_ENABLE_TESTING)
     src/test/test_map.cpp
   )
   if(TARGET ${PROJECT_NAME}-test)
-     target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} ${catkin_LIBRARIES} ${MRPT_LIBS} ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+     target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} ${catkin_LIBRARIES} ${MRPT_LIBRARIES} ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
   endif()
 endif()
