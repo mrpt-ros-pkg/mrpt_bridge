@@ -184,7 +184,7 @@ const bool MapHdl::loadMap(
 	CSimpleMap simpleMap;
 
 	// Load the set of metric maps to consider in the experiments:
-	_metric_map.setListOfMaps(&mapInitializers);
+	_metric_map.setListOfMaps(mapInitializers);
 	if (_debug) mapInitializers.dumpToConsole();
 
 #if MRPT_VERSION >= 0x199
@@ -239,13 +239,17 @@ const bool MapHdl::loadMap(
 			// It's a ".gridmap":
 			if (_debug) printf("Loading gridmap from '.gridmap'...");
 			ASSERTMSG_(
+#if MRPT_VERSION >= 0x199
+				_metric_map.countMapsByClass<COccupancyGridMap2D>() == 1,
+#else
 				_metric_map.m_gridMaps.size() == 1,
+#endif
 				"Error: Trying to load a gridmap into a multi-metric map "
 				"requires 1 gridmap member.");
 			CFileGZInputStream fm(_map_file);
 #if MRPT_VERSION >= 0x199
 			mrpt::serialization::archiveFrom(fm) >>
-				(*_metric_map.m_gridMaps[0]);
+				(*_metric_map.mapByClass<COccupancyGridMap2D>());
 #else
 			fm >> (*_metric_map.m_gridMaps[0]);
 #endif
