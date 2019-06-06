@@ -23,6 +23,7 @@
 
 #if MRPT_VERSION >= 0x199
 #include <mrpt/system/COutputLogger.h>
+#include <mrpt/math/TPose3D.h>
 using namespace mrpt::system;
 #else
 #include <mrpt/utils/COutputLogger.h>
