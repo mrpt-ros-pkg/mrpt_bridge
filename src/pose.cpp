@@ -36,7 +36,6 @@ MRPT C++ classes.
 #include <geometry_msgs/PoseWithCovariance.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Quaternion.h>
-#include <mrpt/math/CMatrixFixedNumeric.h>
 #include <tf/tf.h>
 
 #include <mrpt/version.h>

@@ -11,6 +11,13 @@
 
 #include <cstring>  // size_t
 
+#include <mrpt/version.h>
+#if MRPT_VERSION < 0x199
+#include <mrpt/math/CMatrixFixedNumeric.h>
+#else
+#include <mrpt/math/CMatrixFixed.h>
+#endif
+
 namespace std
 {
 template <class T>
@@ -42,9 +49,6 @@ namespace math
 {
 template <class T>
 class CQuaternion;
-template <typename T, size_t NROWS, size_t NCOLS>
-class CMatrixFixedNumeric;
-typedef CMatrixFixedNumeric<double, 3, 3> CMatrixDouble33;
 struct TPose3D;
 struct TPose2D;
 }  // namespace math
