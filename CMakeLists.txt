@@ -111,7 +111,7 @@ add_dependencies(${PROJECT_NAME}
 )
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PUBLIC
    ${catkin_LIBRARIES}
    ${MRPT_LIBRARIES}
 )
