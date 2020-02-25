@@ -162,6 +162,9 @@ TEST(PoseConversions, check_CPose3D_tofrom_ROS)
 	check_CPose3D_tofrom_ROS(1, 2, 3, DEG2RAD(0), DEG2RAD(0), DEG2RAD(30));
 
 	check_CPose3D_tofrom_ROS(1, 2, 3, DEG2RAD(-5), DEG2RAD(15), DEG2RAD(-30));
+	
+	check_CPose3D_tofrom_ROS(0, 0, 0, DEG2RAD(0), DEG2RAD(90), DEG2RAD(0));
+	check_CPose3D_tofrom_ROS(0, 0, 0, DEG2RAD(0), DEG2RAD(-90), DEG2RAD(0));
 }
 
 // Declare a test
