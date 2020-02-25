@@ -14,7 +14,7 @@
 
 TEST(Time, basicTest)
 {
-	mrpt::system::TTimeStamp mtime = mrpt::system::getCurrentLocalTime();
+	mrpt::system::TTimeStamp mtime = mrpt::system::getCurrentTime();
 	ros::Time rtimeDes;
 	mrpt::system::TTimeStamp mtimeDes;
 	mrpt_bridge::convert(mtime, rtimeDes);

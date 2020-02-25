@@ -14,9 +14,16 @@
 #include <tf/tf.h>
 #include <mrpt_bridge/pose.h>
 #include <gtest/gtest.h>
+#include <Eigen/Dense>
 
 using namespace std;
-using namespace mrpt::utils;  // DEG2RAD()
+
+#if MRPT_VERSION >= 0x199
+#define getAsVectorVal asVectorVal
+using mrpt::DEG2RAD;
+#else
+using mrpt::utils::DEG2RAD;
+#endif
 
 void checkPoseMatrixFromRotationParameters(
 	const double roll, const double pitch, const double yaw)
@@ -50,7 +57,9 @@ TEST(PoseConversions, copyMatrix3x3ToCMatrixDouble33)
 TEST(PoseConversions, copyCMatrixDouble33ToMatrix3x3)
 {
 	mrpt::math::CMatrixDouble33 src;
-	src << 0, 1, 2, 3, 4, 5, 6, 7, 8;
+	for (int r = 0; r < 3; r++)
+		for (int c = 0; c < 3; c++) src(r, c) = 12.0 + r * 4 - c * 2 + r * c;
+
 	tf::Matrix3x3 des;
 	mrpt_bridge::convert(src, des);
 	for (int r = 0; r < 3; r++)
@@ -162,7 +171,7 @@ TEST(PoseConversions, check_CPose3D_tofrom_ROS)
 	check_CPose3D_tofrom_ROS(1, 2, 3, DEG2RAD(0), DEG2RAD(0), DEG2RAD(30));
 
 	check_CPose3D_tofrom_ROS(1, 2, 3, DEG2RAD(-5), DEG2RAD(15), DEG2RAD(-30));
-	
+
 	check_CPose3D_tofrom_ROS(0, 0, 0, DEG2RAD(0), DEG2RAD(90), DEG2RAD(0));
 	check_CPose3D_tofrom_ROS(0, 0, 0, DEG2RAD(0), DEG2RAD(-90), DEG2RAD(0));
 }
