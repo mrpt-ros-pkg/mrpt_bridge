@@ -16,7 +16,7 @@
 #include "ros/ros.h"
 #include "mrpt_bridge/stereo_image.h"
 #include "mrpt_bridge/image.h"
-#include <opencv/highgui.h>
+#include <opencv2/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 
 #include <sensor_msgs/Image.h>
