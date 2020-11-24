@@ -15,7 +15,7 @@
 
 #include "ros/ros.h"
 #include "mrpt_bridge/image.h"
-#include <opencv/highgui.h>
+#include <opencv2/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 
 #include <sensor_msgs/Image.h>
@@ -42,7 +42,13 @@ bool ros2mrpt(const sensor_msgs::Image& msg, CObservationImage& obj)
 	CvImage* frame1 =
 		cv_bridge::toCvCopy(msg, "bgr8").get();  // CvShare(msg,"bgr8").image;
 	if (!frame1) return false;
+
+#if CV_VERSION_MAJOR > 3
+	IplImage ipl = cvIplImage(frame1->image);
+#else
 	IplImage ipl = frame1->image;
+#endif
+
 	obj.image.loadFromIplImage(&ipl);
 
 	return true;
