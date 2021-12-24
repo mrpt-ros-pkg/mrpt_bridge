@@ -50,7 +50,7 @@ bool imu::mrpt2ros(
 {
 	msg.header = msg_header;
 
-	vector<double> measurements = obj.rawMeasurements;
+	auto measurements = obj.rawMeasurements;
 	msg.orientation.x = measurements.at(IMU_ORI_QUAT_X);
 	msg.orientation.y = measurements.at(IMU_ORI_QUAT_Y);
 	msg.orientation.z = measurements.at(IMU_ORI_QUAT_Z);
