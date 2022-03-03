@@ -9,9 +9,9 @@
   <author email="raffi.z@gmail.com">Raphael Zack</author>
 
   <license>BSD</license>
-  <url type="website">http://wiki.ros.org/mrpt_bridge</url>
+  <url type="website">https://wiki.ros.org/mrpt_bridge</url>
 
-  <depend>mrpt1</depend> <!-- Depend on mrpt1 ROS pkgs -->
+  <depend>mrpt2</depend> <!-- Depend on mrpt1 ROS pkgs -->
   <depend>roscpp</depend>
   <depend>tf</depend>
   <depend>std_msgs</depend>
