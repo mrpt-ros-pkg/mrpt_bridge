@@ -2,8 +2,8 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2022-03-04)
+------------------
 * update dep to mrpt2
 * Merge pull request `#12 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/12>`_ from MRo47/ros1
   Fixed build error for ubuntu 20.04, ros-noetic in imu.cpp
