@@ -2,6 +2,28 @@
 Changelog for package mrpt_bridge
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* update dep to mrpt2
+* Merge pull request `#12 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/12>`_ from MRo47/ros1
+  Fixed build error for ubuntu 20.04, ros-noetic in imu.cpp
+* fixed bug (array to vec conversion -> use auto)
+* Build with opencv 4
+* fix build against mrpt2
+* update gitignore; add PUBLIC flags to deps
+* Quaternion singularity
+  Check for degenerate case when converting quaternion to angles.
+* Ensure the real part of quaternions is real
+  Fixes: https://github.com/mrpt-ros-pkg/pose_cov_ops/issues/7
+* time convert: fix round error in nanoseconds
+* Fix build against mrpt-2
+* Copyright notices, clang-format.
+  Also, avoid some bad practices: C includes vs C++ ones; using namespace
+  in headers.
+* fix build against mrpt2
+  Fixed `#5 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/5>`_
+* Contributors: Jose Luis Blanco Claraco, Jose Luis Blanco-Claraco, Jose-Luis Blanco, Julian Lopez Velasquez, MRo47, Mathieu Mege, cmorcan
+
 0.1.25 (2018-07-11)
 -------------------
 * Merge pull request `#3 <https://github.com/mrpt-ros-pkg/mrpt_bridge/issues/3>`_ from tuw-robotics/master
