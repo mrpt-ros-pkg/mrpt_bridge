@@ -1,11 +1,7 @@
- * Travis CI: [![Build Status](https://travis-ci.org/mrpt-ros-pkg/mrpt_bridge.svg?branch=master)](https://travis-ci.org/mrpt-ros-pkg/mrpt_bridge)
- * ROS build farm:
-   * git master:
-     * ROS Kinetic @ u16.04 Xenial [![Build Status](http://build.ros.org/job/Kdev__mrpt_bridge__ubuntu_xenial_amd64/badge/icon)](http://build.ros.org/job/Kdev__mrpt_bridge__ubuntu_xenial_amd64/)
-     * ROS Melodic @ u8.04 Bionic [![Build Status](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/badge/icon)](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/)
-   * Last released version:
-     * ROS Kinetic @ u16.04 Xenial [![Build Status](http://build.ros.org/job/Kbin_uX64__mrpt_bridge__ubuntu_xenial_amd64__binary/badge/icon)](http://build.ros.org/job/Kbin_uX64__mrpt_bridge__ubuntu_xenial_amd64__binary/)
-     * ROS Melodic @ u18.04 Bionic: [![Build Status](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/badge/icon)](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/)
+| Develop branch | Releases |
+|---|----|
+| ROS1 Melodic @ u18.04 [![Build Status](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/badge/icon)](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/) | ROS1 Melodic @ u18.04: [![Build Status](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/badge/icon)](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/) |
+|  ROS1 Noetic @ u20.04 [![Build Status](https://build.ros.org/job/Ndev__mrpt_bridge__ubuntu_focal_amd64/badge/icon)](https://build.ros.org/job/Ndev__mrpt_bridge__ubuntu_focal_amd64/) | ROS1 Noetic @ u20.04 [![Build Status](https://build.ros.org/job/Nbin_uF64__mrpt_bridge__ubuntu_focal_amd64__binary/badge/icon)](https://build.ros.org/job/Nbin_uF64__mrpt_bridge__ubuntu_focal_amd64__binary/)  |
 
 mrpt_bridge
 ===============
