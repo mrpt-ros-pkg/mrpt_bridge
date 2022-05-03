@@ -61,7 +61,8 @@ inline VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(log4cxx::LevelPtr lvl)
 	}
 	else
 	{
-		THROW_EXCEPTION("Unknown log4cxx::Level is given.");
+		mrpt_lvl = LVL_INFO;
+		ROS_ERROR("Unknown log4cxx::Level is given.");
 	}
 
 	return mrpt_lvl;
