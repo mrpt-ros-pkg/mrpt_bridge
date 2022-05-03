@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>mrpt_bridge</name>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <description>C++ library to convert between ROS messages and MRPT classes</description>
 
   <maintainer email="jlblanco@ual.es">Jose-Luis Blanco-Claraco</maintainer>
