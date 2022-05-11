@@ -17,71 +17,32 @@
 #include "mrpt_bridge/image.h"
 #include <opencv2/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
-
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/image_encodings.h>
+#include <mrpt/ros1bridge/time.h>
+#include <mrpt/ros1bridge/image.h>
 
-#include <mrpt/version.h>
-#if MRPT_VERSION >= 0x199
 using namespace mrpt::img;
-#else
-using namespace mrpt::utils;
-#endif
-
 using namespace ros;
 using namespace sensor_msgs;
 using namespace cv;
 using namespace cv_bridge;
 
-namespace mrpt_bridge
+bool mrpt_bridge::image::ros2mrpt(
+	const sensor_msgs::Image& msg, mrpt::obs::CObservationImage& obj)
 {
-namespace image
-{
-bool ros2mrpt(const sensor_msgs::Image& msg, CObservationImage& obj)
-{
-	CvImage* frame1 =
-		cv_bridge::toCvCopy(msg, "bgr8").get();  // CvShare(msg,"bgr8").image;
-	if (!frame1) return false;
-
-#if CV_VERSION_MAJOR > 3
-	IplImage ipl = cvIplImage(frame1->image);
-#else
-	IplImage ipl = frame1->image;
-#endif
-
-	obj.image.loadFromIplImage(&ipl);
-
+	obj.timestamp = mrpt::ros1bridge::fromROS(msg.header.stamp);
+	obj.image = mrpt::ros1bridge::fromROS(msg);
 	return true;
 }
 
-/************************************************************************
- *						mrpt2ros    							        *
- ************************************************************************/
-bool mrpt2ros(
-	const CObservationImage& obj, const std_msgs::Header& msg_header,
+bool mrpt_bridge::image::mrpt2ros(
+	const mrpt::obs::CObservationImage& obj, const std_msgs::Header& msg_header,
 	sensor_msgs::Image& msg)
 {
-	CImage temp_img = obj.image;
-#if MRPT_VERSION>=0x199
-	Mat cvImg = temp_img.asCvMatRef();
-#else
-	Mat cvImg = cv::cvarrToMat(temp_img.getAs<IplImage>());
-#endif
-
-	cv_bridge::CvImage img_bridge;
-
-	img_bridge = CvImage(msg.header, sensor_msgs::image_encodings::BGR8, cvImg);
-	img_bridge.toImageMsg(msg);
-
-	msg.encoding = "bgr8";
-	msg.header = msg_header;
-	msg.height = (int)obj.image.getHeight();
-	msg.width = (int)obj.image.getWidth();
-
+	msg = mrpt::ros1bridge::toROS(obj.image, msg_header);
 	return true;
 }
-}  // namespace image
-}  // namespace mrpt_bridge
 
 //
 /*

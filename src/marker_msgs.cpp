@@ -15,7 +15,7 @@
  **/
 
 #include "mrpt_bridge/marker_msgs.h"
-#include "mrpt_bridge/time.h"
+#include <mrpt/ros1bridge/time.h>
 #include <marker_msgs/MarkerDetection.h>
 #include <mrpt/obs/CObservationBearingRange.h>
 
@@ -28,7 +28,7 @@ bool convert(
 	const marker_msgs::MarkerDetection& src, const mrpt::poses::CPose3D& pose,
 	mrpt::obs::CObservationBearingRange& des)
 {
-	convert(src.header.stamp, des.timestamp);
+	des.timestamp = mrpt::ros1bridge::fromROS(src.header.stamp);
 	des.setSensorPose(pose);
 	des.minSensorDistance = src.distance_min;
 	des.maxSensorDistance = src.distance_max;
@@ -59,7 +59,8 @@ bool convert(
 	const marker_msgs::MarkerDetection& src, const mrpt::poses::CPose3D& pose,
 	mrpt::obs::CObservationBeaconRanges& des)
 {
-	convert(src.header.stamp, des.timestamp);
+	des.timestamp = mrpt::ros1bridge::fromROS(src.header.stamp);
+
 	des.setSensorPose(pose);
 	des.minSensorDistance = src.distance_min;
 	des.maxSensorDistance = src.distance_max;

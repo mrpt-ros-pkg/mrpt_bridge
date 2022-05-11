@@ -45,7 +45,6 @@ namespace poses
 class CPose3D;
 }
 }  // namespace mrpt
-#include <mrpt/version.h>
 
 namespace mrpt
 {
@@ -61,7 +60,7 @@ namespace mrpt_bridge
  *  @{ */
 
 /** ROS->MRPT: Takes a mrpt_msgs::CObservationBearingRange and the relative pose
- * of the laser wrt base_link and builds a ObservationRangeBearing
+ * of the sensor wrt base_link and builds a ObservationRangeBearing
  * \return true on sucessful conversion, false on any error.
  * \sa mrpt2ros
  */

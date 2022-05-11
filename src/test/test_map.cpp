@@ -6,7 +6,7 @@
  */
 
 #include <gtest/gtest.h>
-#include <mrpt_bridge/map.h>
+#include <mrpt/ros1bridge/map.h>
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 
@@ -42,9 +42,10 @@ TEST(Map, basicTestHeader)
 	getEmptyRosMsg(srcRos);
 
 	srcRos.info.origin.orientation.x = 1;  // roated maps are not supported
-	EXPECT_FALSE(mrpt_bridge::convert(srcRos, desMrpt));
+	EXPECT_FALSE(mrpt::ros1bridge::fromROS(srcRos, desMrpt));
+
 	srcRos.info.origin.orientation.x = 0;  // fix rotation
-	EXPECT_TRUE(mrpt_bridge::convert(srcRos, desMrpt));
+	EXPECT_TRUE(mrpt::ros1bridge::fromROS(srcRos, desMrpt));
 
 	EXPECT_EQ(srcRos.info.width, desMrpt.getSizeX());
 	EXPECT_EQ(srcRos.info.height, desMrpt.getSizeY());
@@ -53,8 +54,8 @@ TEST(Map, basicTestHeader)
 	{
 		for (uint32_t w = 0; w < srcRos.info.width; w++)
 		{
-			EXPECT_EQ(
-				desMrpt.getPos(w, h), 0.5);  // all -1 entreis should map to 0.5
+			// all -1 entries should map to 0.5
+			EXPECT_EQ(desMrpt.getPos(w, h), 0.5);
 		}
 	}
 }
@@ -67,8 +68,8 @@ TEST(Map, check_ros2mrpt_and_back)
 
 	getEmptyRosMsg(srcRos);
 
-	ASSERT_TRUE(mrpt_bridge::convert(srcRos, desMrpt));
-	ASSERT_TRUE(mrpt_bridge::convert(desMrpt, desRos, desRos.header));
+	ASSERT_TRUE(mrpt::ros1bridge::fromROS(srcRos, desMrpt));
+	ASSERT_TRUE(mrpt::ros1bridge::toROS(desMrpt, desRos, desRos.header));
 	for (uint32_t h = 0; h < srcRos.info.width; h++)
 	{
 		for (uint32_t w = 0; w < srcRos.info.width; w++)
@@ -83,8 +84,8 @@ TEST(Map, check_ros2mrpt_and_back)
 	{
 		srcRos.data[i] = i;
 	}
-	EXPECT_TRUE(mrpt_bridge::convert(srcRos, desMrpt));
-	EXPECT_TRUE(mrpt_bridge::convert(desMrpt, desRos, desRos.header));
+	EXPECT_TRUE(mrpt::ros1bridge::fromROS(srcRos, desMrpt));
+	EXPECT_TRUE(mrpt::ros1bridge::toROS(desMrpt, desRos, desRos.header));
 	for (int i = 0; i <= 100; i++)
 	{
 		// printf("%4i, %4.3f = %4.3f,%4i\n", srcRos.data[i],

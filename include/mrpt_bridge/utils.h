@@ -17,18 +17,8 @@
 
 #include <ros/console.h>
 #include <mrpt/system/datetime.h>
-#include <mrpt/poses/CPose3D.h>
-#include <mrpt/version.h>
-#include <log4cxx/logger.h>
-
-#if MRPT_VERSION >= 0x199
 #include <mrpt/system/COutputLogger.h>
-#include <mrpt/math/TPose3D.h>
-using namespace mrpt::system;
-#else
-#include <mrpt/utils/COutputLogger.h>
-using namespace mrpt::utils;
-#endif
+#include <log4cxx/logger.h>
 
 namespace mrpt_bridge
 {
@@ -36,32 +26,33 @@ namespace mrpt_bridge
  *@brief function that converts ROS verbosity level log4cxx::Level to MRPT
  * equivalent MRPT's VerbosityLevel
  */
-inline VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(log4cxx::LevelPtr lvl)
+inline mrpt::system::VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(
+	log4cxx::LevelPtr lvl)
 {
 	using namespace log4cxx;
 
 	// determine on the corresponding VerbosityLevel
-	VerbosityLevel mrpt_lvl;
+	mrpt::system::VerbosityLevel mrpt_lvl;
 
 	if (lvl == Level::getFatal() || lvl == Level::getError())
 	{
-		mrpt_lvl = LVL_ERROR;
+		mrpt_lvl = mrpt::system::LVL_ERROR;
 	}
 	else if (lvl == Level::getWarn())
 	{
-		mrpt_lvl = LVL_WARN;
+		mrpt_lvl = mrpt::system::LVL_WARN;
 	}
 	else if (lvl == Level::getInfo())
 	{
-		mrpt_lvl = LVL_INFO;
+		mrpt_lvl = mrpt::system::LVL_INFO;
 	}
-	else if (lvl == Level::getDebug())
+	else if (lvl == Level::getDebug() || lvl == Level::getTrace())
 	{
-		mrpt_lvl = LVL_DEBUG;
+		mrpt_lvl = mrpt::system::LVL_DEBUG;
 	}
 	else
 	{
-		mrpt_lvl = LVL_INFO;
+		mrpt_lvl = mrpt::system::LVL_INFO;
 		ROS_ERROR("Unknown log4cxx::Level is given.");
 	}
 
@@ -70,15 +61,16 @@ inline VerbosityLevel rosLoggerLvlToMRPTLoggerLvl(log4cxx::LevelPtr lvl)
 }  // end of rosLoggerLvlToMRPTLoggerLvl
 
 /**
- *@brief callback that is called by MRPT mrpt::utils::COuputLogger to redirect
+ *@brief callback that is called by MRPT mrpt::system::COuputLogger to redirect
  * log messages to ROS logger.
  *	This function has to be inline, otherwise option
  * log4j.logger.ros.package_name will be taken from mrpt_bridge
  * instead of the package from which macro is actually called.
  */
 inline void mrptToROSLoggerCallback(
-	const std::string& msg, const VerbosityLevel level,
-	const std::string& loggerName, const mrpt::system::TTimeStamp timestamp)
+	const std::string& msg, const mrpt::system::VerbosityLevel level,
+	[[maybe_unused]] const std::string& loggerName,
+	[[maybe_unused]] const mrpt::system::TTimeStamp timestamp)
 {
 	// Remove trailing \n if present
 	std::string tmsg = msg;
@@ -88,38 +80,22 @@ inline void mrptToROSLoggerCallback(
 		tmsg.erase(tmsg.end() - 1);
 	}
 
-	if (level == LVL_DEBUG)
+	switch (level)
 	{
-		ROS_DEBUG("%s", tmsg.c_str());
+		case mrpt::system::LVL_DEBUG:
+			ROS_DEBUG("%s", tmsg.c_str());
+			break;
+		case mrpt::system::LVL_WARN:
+			ROS_WARN("%s", tmsg.c_str());
+			break;
+		case mrpt::system::LVL_ERROR:
+			ROS_ERROR("%s", tmsg.c_str());
+			break;
+		default:
+		case mrpt::system::LVL_INFO:
+			ROS_INFO("%s", tmsg.c_str());
+			break;
 	}
-	else if (level == LVL_INFO)
-	{
-		ROS_INFO("%s", tmsg.c_str());
-	}
-	else if (level == LVL_WARN)
-	{
-		ROS_WARN("%s", tmsg.c_str());
-	}
-	else if (level == LVL_ERROR)
-	{
-		ROS_ERROR("%s", tmsg.c_str());
-	}
-}
-inline void mrptToROSLoggerCallback_mrpt_15(
-	const std::string& msg, const VerbosityLevel level,
-	const std::string& loggerName, const mrpt::system::TTimeStamp timestamp,
-	void* userParam)
-{
-	mrptToROSLoggerCallback(msg, level, loggerName, timestamp);
-}
-
-inline mrpt::math::TPose3D p2t(const mrpt::poses::CPose3D& p)
-{
-#if MRPT_VERSION >= 0x199
-	return p.asTPose();
-#else
-	return mrpt::math::TPose3D(p);
-#endif
 }
 
 }  // namespace mrpt_bridge

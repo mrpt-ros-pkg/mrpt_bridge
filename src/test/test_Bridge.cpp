@@ -2,7 +2,7 @@
    |                     Mobile Robot Programming Toolkit (MRPT)            |
    |                          http://www.mrpt.org/                          |
    |                                                                        |
-   | Copyright (c) 2005-2017, Individual contributors, see AUTHORS file     |
+   | Copyright (c) 2005-2022, Individual contributors, see AUTHORS file     |
    | See: http://www.mrpt.org/Authors - All rights reserved.                |
    | Released under BSD License. See details in http://www.mrpt.org/License |
    +------------------------------------------------------------------------+ */
@@ -12,21 +12,16 @@
 	FILE: test_Bridge.cpp
 	AUTHOR: Raghavender Sahdev <raghavendersahdev@gmail.com>
   ---------------------------------------------------------------*/
-#include "mrpt_bridge/GPS.h"
-#include "mrpt_bridge/range.h"
-#include "mrpt_bridge/imu.h"
-#include "mrpt_bridge/image.h"
-#include "mrpt_bridge/stereo_image.h"
-
-#include "../GPS.cpp"
-#include "../range.cpp"
-#include "../imu.cpp"
-#include "../image.cpp"
-#include "../stereo_image.cpp"
-
-/// mrpt imports
+#include <mrpt/ros1bridge/gps.h>
+#include <mrpt/ros1bridge/range.h>
+#include <mrpt/ros1bridge/imu.h>
+#include <mrpt/ros1bridge/image.h>
+#include <mrpt/ros1bridge/stereo_image.h>
 #include <mrpt/obs/CRawlog.h>
 #include <mrpt/system/filesystem.h>
+#include <ros/node_handle.h>
+
+#include <mrpt_bridge/image.h>
 
 /// c++ standard stuff
 #include <dirent.h>
@@ -202,6 +197,7 @@ int main(int argc, char** argv)
 		/// Publishing sensor_msgs::Image ROS message
 		mrpt_Image.image.loadFromFile(
 			files_fullpath.at(i % (files_fullpath.size() - 1)));
+
 		mrpt_bridge::image::mrpt2ros(mrpt_Image, header, ros_Image);
 		image_pub.publish(ros_Image);
 
@@ -227,7 +223,7 @@ int main(int argc, char** argv)
 		mrpt_IMU.rawMeasurements.at(IMU_X_VEL) = i * 0.1 * i * 0.2;
 		mrpt_IMU.rawMeasurements.at(IMU_Y_VEL) = i * 0.1 * i * 0.2;
 		mrpt_IMU.rawMeasurements.at(IMU_Z_VEL) = 0;
-		mrpt_bridge::imu::mrpt2ros(mrpt_IMU, header, ros_Imu);
+		mrpt::ros1bridge::toROS(mrpt_IMU, header, ros_Imu);
 		imu_pub.publish(ros_Imu);
 
 		/// Publishing sensor_msgs::NavSatFix ROS message
@@ -237,11 +233,11 @@ int main(int argc, char** argv)
 		gga.fields.longitude_degrees = i * 0.03 + 43;
 		gga.fields.fix_quality = 1;
 		mrpt_GPS.setMsg(gga);
-		mrpt_bridge::GPS::mrpt2ros(mrpt_GPS, header, ros_GPS);
+		mrpt::ros1bridge::toROS(mrpt_GPS, header, ros_GPS);
 		navSatFix_pub.publish(ros_GPS);
 
 		/// Publishing sensor_msgs::Range ROS message
-		mrpt_bridge::range::mrpt2ros(mrpt_Range, header, ros_Range);
+		mrpt::ros1bridge::toROS(mrpt_Range, header, ros_Range);
 		ROS_INFO(" published %d", i);
 		// publishing the ranges over num_ranges umber of topics
 		for (int i = 0; i < num_ranges; i++) range_pub[i].publish(ros_Range[i]);

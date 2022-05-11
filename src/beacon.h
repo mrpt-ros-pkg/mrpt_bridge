@@ -11,52 +11,10 @@
 
 #include <cstdint>
 #include <string>
-
-namespace std
-{
-template <class T>
-class allocator;
-}
-
-namespace geometry_msgs
-{
-template <class ContainerAllocator>
-struct Pose_;
-typedef Pose_<std::allocator<void>> Pose;
-}  // namespace geometry_msgs
-
-namespace mrpt_msgs
-{
-template <class ContainerAllocator>
-struct ObservationRangeBeacon_;
-typedef ObservationRangeBeacon_<std::allocator<void>> ObservationRangeBeacon;
-}  // namespace mrpt_msgs
-
-namespace mrpt
-{
-namespace poses
-{
-class CPose3D;
-}
-}  // namespace mrpt
-#include <mrpt/version.h>
-#if MRPT_VERSION >= 0x130
-namespace mrpt
-{
-namespace obs
-{
-class CObservationBeaconRanges;
-}
-}  // namespace mrpt
-#else
-namespace mrpt
-{
-namespace slam
-{
-class CObservationBeaconRanges;
-}
-}  // namespace mrpt
-#endif
+#include <geometry_msgs/Pose.h>
+#include <mrpt_msgs/ObservationRangeBeacon.h>
+#include <mrpt/poses/CPose3D.h>
+#include <mrpt/obs/CObservationBeaconRanges.h>
 
 namespace mrpt_bridge
 {
@@ -71,23 +29,14 @@ namespace mrpt_bridge
 bool convert(
 	const mrpt_msgs::ObservationRangeBeacon& _msg,
 	const mrpt::poses::CPose3D& _pose,
-#if MRPT_VERSION >= 0x130
-	mrpt::obs::CObservationBeaconRanges& _obj
-#else
-	mrpt::slam::CObservationBeaconRanges& _obj
-#endif
-);
+	mrpt::obs::CObservationBeaconRanges& _obj);
 
 /** MRPT->ROS: Takes a CObservationBeaconRanges and outputs range data in
  * mrpt_msgs::ObservationRangeBeacon \return true on sucessful conversion, false
  * on any error. \sa ros2mrpt
  */
 bool convert(
-#if MRPT_VERSION >= 0x130
 	const mrpt::obs::CObservationBeaconRanges& _obj,
-#else
-	const mrpt::slam::CObservationBeaconRanges& _obj,
-#endif
 	mrpt_msgs::ObservationRangeBeacon& _msg);
 
 /** MRPT->ROS: Takes a CObservationBeaconRanges and outputs range data in
@@ -96,11 +45,7 @@ bool convert(
  * ros2mrpt
  */
 bool convert(
-#if MRPT_VERSION >= 0x130
 	const mrpt::obs::CObservationBeaconRanges& _obj,
-#else
-	const mrpt::slam::CObservationBeaconRanges& _obj,
-#endif
 	mrpt_msgs::ObservationRangeBeacon& _msg, geometry_msgs::Pose& _pose);
 
 /** @} */

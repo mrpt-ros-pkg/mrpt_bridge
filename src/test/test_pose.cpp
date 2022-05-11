@@ -8,22 +8,17 @@
 #include <mrpt/poses/CPosePDFGaussian.h>
 #include <mrpt/poses/CPose3DPDFGaussian.h>
 #include <mrpt/math/CQuaternion.h>
+#include <mrpt/ros1bridge/pose.h>
 #include <geometry_msgs/PoseWithCovariance.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/Quaternion.h>
 #include <tf/tf.h>
-#include <mrpt_bridge/pose.h>
+#include <mrpt/ros1bridge/pose.h>
 #include <gtest/gtest.h>
 #include <Eigen/Dense>
 
 using namespace std;
-
-#if MRPT_VERSION >= 0x199
-#define getAsVectorVal asVectorVal
 using mrpt::DEG2RAD;
-#else
-using mrpt::utils::DEG2RAD;
-#endif
 
 void checkPoseMatrixFromRotationParameters(
 	const double roll, const double pitch, const double yaw)
@@ -44,26 +39,6 @@ void checkPoseMatrixFromRotationParameters(
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
 			EXPECT_NEAR(basis[i][j], mrpt_basis(i, j), 0.01);
-}
-
-TEST(PoseConversions, copyMatrix3x3ToCMatrixDouble33)
-{
-	tf::Matrix3x3 src(0, 1, 2, 3, 4, 5, 6, 7, 8);
-	mrpt::math::CMatrixDouble33 des;
-	mrpt_bridge::convert(src, des);
-	for (int r = 0; r < 3; r++)
-		for (int c = 0; c < 3; c++) EXPECT_FLOAT_EQ(des(r, c), src[r][c]);
-}
-TEST(PoseConversions, copyCMatrixDouble33ToMatrix3x3)
-{
-	mrpt::math::CMatrixDouble33 src;
-	for (int r = 0; r < 3; r++)
-		for (int c = 0; c < 3; c++) src(r, c) = 12.0 + r * 4 - c * 2 + r * c;
-
-	tf::Matrix3x3 des;
-	mrpt_bridge::convert(src, des);
-	for (int r = 0; r < 3; r++)
-		for (int c = 0; c < 3; c++) EXPECT_FLOAT_EQ(des[r][c], src(r, c));
 }
 
 TEST(PoseConversions, checkPoseMatrixFromRotationParameters)
@@ -90,8 +65,9 @@ TEST(PoseConversions, reference_frame_change_with_rotations)
 	ros_msg_original_pose.pose.orientation.w = 1;
 
 	// to mrpt
-	mrpt::poses::CPose3DPDFGaussian mrpt_original_pose;
-	mrpt_bridge::convert(ros_msg_original_pose, mrpt_original_pose);
+	mrpt::poses::CPose3DPDFGaussian mrpt_original_pose =
+		mrpt::ros1bridge::fromROS(ros_msg_original_pose);
+
 	EXPECT_EQ(
 		ros_msg_original_pose.pose.position.x, mrpt_original_pose.mean[0]);
 
@@ -115,8 +91,8 @@ TEST(PoseConversions, reference_frame_change_with_rotations)
 	tf::Pose tf_result = rotation_pose_tf * tf_original_pose;
 	EXPECT_NEAR(tf_result.getOrigin()[1], 1.0, 0.01);
 
-	geometry_msgs::Pose mrpt_ros_result;
-	mrpt_bridge::convert(mrpt_result, mrpt_ros_result);
+	geometry_msgs::Pose mrpt_ros_result =
+		mrpt::ros1bridge::toROS_Pose(mrpt_result);
 
 	EXPECT_NEAR(mrpt_ros_result.position.x, tf_result.getOrigin()[0], 0.01);
 	EXPECT_NEAR(mrpt_ros_result.position.y, tf_result.getOrigin()[1], 0.01);
@@ -129,8 +105,7 @@ void check_CPose3D_tofrom_ROS(
 	const mrpt::poses::CPose3D p3D(x, y, z, yaw, pitch, roll);
 
 	// Convert MRPT->ROS
-	geometry_msgs::Pose ros_p3D;
-	mrpt_bridge::convert(p3D, ros_p3D);
+	geometry_msgs::Pose ros_p3D = mrpt::ros1bridge::toROS_Pose(p3D);
 
 	// Compare ROS quat vs. MRPT quat:
 	mrpt::math::CQuaternionDouble q;
@@ -146,16 +121,12 @@ void check_CPose3D_tofrom_ROS(
 	EXPECT_NEAR(ros_p3D.orientation.w, q.r(), 1e-4) << "p: " << p3D << endl;
 
 	// Test the other path: ROS->MRPT
-	mrpt::poses::CPose3D p_bis;
-	mrpt_bridge::convert(ros_p3D, p_bis);
+	mrpt::poses::CPose3D p_bis = mrpt::ros1bridge::fromROS(ros_p3D);
 
 	// p_bis==p3D?
 	EXPECT_NEAR(
-		(p_bis.getAsVectorVal() - p3D.getAsVectorVal())
-			.array()
-			.abs()
-			.maxCoeff(),
-		0, 1e-4)
+		(p_bis.asVectorVal() - p3D.asVectorVal()).array().abs().maxCoeff(), 0,
+		1e-4)
 		<< "p_bis: " << p_bis << endl
 		<< "p3D: " << p3D << endl;
 }
@@ -182,21 +153,16 @@ TEST(PoseConversions, check_CPose2D_to_ROS)
 	const mrpt::poses::CPose2D p2D(1, 2, 0.56);
 
 	// Convert MRPT->ROS
-	geometry_msgs::Pose ros_p2D;
-	mrpt_bridge::convert(p2D, ros_p2D);
+	geometry_msgs::Pose ros_p2D = mrpt::ros1bridge::toROS_Pose(p2D);
 
 	// Compare vs. 3D pose:
 	const mrpt::poses::CPose3D p3D = mrpt::poses::CPose3D(p2D);
-	mrpt::poses::CPose3D p3D_ros;
-	mrpt_bridge::convert(ros_p2D, p3D_ros);
+	mrpt::poses::CPose3D p3D_ros = mrpt::ros1bridge::fromROS(ros_p2D);
 
 	// p3D_ros should equal p3D
 	EXPECT_NEAR(
-		(p3D_ros.getAsVectorVal() - p3D.getAsVectorVal())
-			.array()
-			.abs()
-			.maxCoeff(),
-		0, 1e-4)
+		(p3D_ros.asVectorVal() - p3D.asVectorVal()).array().abs().maxCoeff(), 0,
+		1e-4)
 		<< "p3D_ros: " << p3D_ros << endl
 		<< "p3D: " << p3D << endl;
 }

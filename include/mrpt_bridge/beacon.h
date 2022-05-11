@@ -39,7 +39,6 @@ namespace poses
 class CPose3D;
 }
 }  // namespace mrpt
-#include <mrpt/version.h>
 
 namespace mrpt
 {

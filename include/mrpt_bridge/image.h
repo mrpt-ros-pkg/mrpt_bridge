@@ -15,19 +15,18 @@
 
 #pragma once
 
-#include <cstring>  // size_t
+#include <cstring>	// size_t
 #include <sensor_msgs/Image.h>
 #include <mrpt/obs/CObservationImage.h>
-
-using namespace mrpt::obs;
 
 namespace mrpt_bridge
 {
 namespace image
 {
-bool ros2mrpt(const sensor_msgs::Image& msg, CObservationImage& obj);
+bool ros2mrpt(const sensor_msgs::Image& msg, mrpt::obs::CObservationImage& obj);
 bool mrpt2ros(
-	const CObservationImage& obj, const std_msgs::Header& msg_header,
+	const mrpt::obs::CObservationImage& obj, const std_msgs::Header& msg_header,
 	sensor_msgs::Image& msg);
+
 }  // namespace image
 }  // namespace mrpt_bridge

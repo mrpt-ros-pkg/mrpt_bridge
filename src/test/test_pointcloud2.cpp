@@ -5,9 +5,7 @@
  *      Author: Pablo Iñigo Blasco
  */
 
-#include <mrpt_bridge/point_cloud2.h>
-
-#include <mrpt/version.h>
+#include <mrpt/ros1bridge/point_cloud2.h>
 #include <mrpt/maps/CSimplePointsMap.h>
 #include <pcl/conversions.h>
 #include <pcl/point_cloud.h>
@@ -42,7 +40,7 @@ TEST(PointCloud2, basicTest)
 	mrpt::maps::CSimplePointsMap mrpt_pc;
 
 	// printf("step 3\n");
-	mrpt_bridge::copy(point_cloud2_msg, mrpt_pc);
+	mrpt::ros1bridge::fromROS(point_cloud2_msg, mrpt_pc);
 
 	i_f = 0;
 	for (int i = 0; i < num_points; i++)

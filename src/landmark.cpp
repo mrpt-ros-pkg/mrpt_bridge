@@ -14,15 +14,14 @@
  */
 
 #include <geometry_msgs/Pose.h>
-#include "mrpt_bridge/time.h"
-#include "mrpt_bridge/pose.h"
+#include <mrpt/ros1bridge/time.h>
+#include <mrpt/ros1bridge/pose.h>
 #include <mrpt_msgs/ObservationRangeBearing.h>
 #include "tf/transform_datatypes.h"
 #include "tf/LinearMath/Matrix3x3.h"
 #include "mrpt_bridge/landmark.h"
-
-#include <mrpt/version.h>
 #include <mrpt/obs/CObservationBearingRange.h>
+
 using namespace mrpt::obs;
 
 namespace mrpt_bridge
@@ -32,7 +31,8 @@ bool convert(
 	const mrpt::poses::CPose3D& _pose, CObservationBearingRange& _obj)
 
 {
-	// mrpt_bridge::convert(_msg.header.stamp, _obj.timestamp);
+	_obj.timestamp = mrpt::ros1bridge::fromROS(_msg.header.stamp);
+
 	mrpt::poses::CPose3D cpose_obj;
 
 	//_obj.stdError = _msg.sensor_std_range;
@@ -45,8 +45,8 @@ bool convert(
 
 	if (_pose.empty())
 	{
-		convert(_msg.sensor_pose_on_robot, cpose_obj);
-		_obj.setSensorPose(cpose_obj);
+		_obj.setSensorPose(
+			mrpt::ros1bridge::fromROS(_msg.sensor_pose_on_robot));
 	}
 	else
 	{
@@ -72,11 +72,9 @@ bool convert(
 	const CObservationBearingRange& _obj,
 	mrpt_msgs::ObservationRangeBearing& _msg)
 {
-	mrpt::poses::CPose3D cpose_obj;
+	_msg.header.stamp = mrpt::ros1bridge::toROS(_obj.timestamp);
 
-	// mrpt_bridge::convert(_obj.timestamp, _msg.header.stamp);
-	_obj.getSensorPose(cpose_obj);
-	convert(cpose_obj, _msg.sensor_pose_on_robot);
+	_msg.sensor_pose_on_robot = mrpt::ros1bridge::toROS_Pose(_obj.sensorPose());
 
 	_msg.max_sensor_distance = _obj.maxSensorDistance;
 	_msg.min_sensor_distance = _obj.minSensorDistance;
@@ -104,9 +102,7 @@ bool convert(
 	mrpt_msgs::ObservationRangeBearing& _msg, geometry_msgs::Pose& _pose)
 {
 	convert(_obj, _msg);
-	mrpt::poses::CPose3D pose;
-	_obj.getSensorPose(pose);
-	convert(pose, _pose);
+	_pose = mrpt::ros1bridge::toROS_Pose(_obj.sensorPose());
 	return true;
 }
 }  // namespace mrpt_bridge

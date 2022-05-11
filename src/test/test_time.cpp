@@ -6,7 +6,7 @@
  */
 
 #include <gtest/gtest.h>
-#include <mrpt_bridge/time.h>
+#include <mrpt/ros1bridge/time.h>
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
 #include <boost/date_time/posix_time/time_formatters.hpp>
@@ -14,11 +14,11 @@
 
 TEST(Time, basicTest)
 {
-	mrpt::system::TTimeStamp mtime = mrpt::system::getCurrentTime();
-	ros::Time rtimeDes;
-	mrpt::system::TTimeStamp mtimeDes;
-	mrpt_bridge::convert(mtime, rtimeDes);
-	mrpt_bridge::convert(rtimeDes, mtimeDes);
+	const mrpt::system::TTimeStamp mtime = mrpt::system::getCurrentTime();
+	const ros::Time rtimeDes = mrpt::ros1bridge::toROS(mtime);
+	const mrpt::system::TTimeStamp mtimeDes =
+		mrpt::ros1bridge::fromROS(rtimeDes);
+
 	std::cout << "TimeNow: "
 			  << boost::posix_time::to_simple_string(rtimeDes.toBoost())
 			  << std::endl;
