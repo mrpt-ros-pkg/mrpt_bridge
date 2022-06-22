@@ -1,7 +1,4 @@
-| Develop branch | Releases |
-|---|----|
-| ROS1 Melodic @ u18.04 [![Build Status](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/badge/icon)](http://build.ros.org/job/Mdev__mrpt_bridge__ubuntu_bionic_amd64/) | ROS1 Melodic @ u18.04: [![Build Status](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/badge/icon)](http://build.ros.org/job/Mbin_uB64__mrpt_bridge__ubuntu_bionic_amd64__binary/) |
-|  ROS1 Noetic @ u20.04 [![Build Status](https://build.ros.org/job/Ndev__mrpt_bridge__ubuntu_focal_amd64/badge/icon)](https://build.ros.org/job/Ndev__mrpt_bridge__ubuntu_focal_amd64/) | ROS1 Noetic @ u20.04 [![Build Status](https://build.ros.org/job/Nbin_uF64__mrpt_bridge__ubuntu_focal_amd64__binary/badge/icon)](https://build.ros.org/job/Nbin_uF64__mrpt_bridge__ubuntu_focal_amd64__binary/)  |
+2022-Jun: Obsolete package. Deprecated in favor of upstream `mrpt::ros1bridge` and `mrpt::ros2bridge` libraries, now distributed as part of the `ros-${ROS_DISTRO}-mrpt2` package.
 
 mrpt_bridge
 ===============
